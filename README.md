@@ -41,9 +41,39 @@ In the virtual environment that this project has, Flask is already installed and
 
 ---
 ## Usage
+The first thing to do is load the database.
+
+1. 
+
 We need to activate the virtual environment, we follow the following steps:
 
-1. We move to the working directory. We execute the following command
+1. We change to the postgres user with the command:
+```
+$ sudo su postgres
+```
+2. Then we enter PostgresSQL with the command
+```
+$ psql
+```
+3. We create a database as follows:
+```
+CREATE DATABASE alquiler_coches;
+```
+4. We connect to the database:
+```
+\c alquiler_coches
+```
+5. To execute the sql script that has the repository we use the following command
+```
+\i alquiler_coches.sql
+```
+6. Now we check that the database was loaded
+```
+\dti+
+```
+![tables](./images/Capture_tables.png)
+
+7. We leave postgres and change the postgres user. Now the same working directory we execute the following command to activate the virtual environment
 ```
 $ . venv/bin/activate
 ```
@@ -52,12 +82,12 @@ or
 ```
 $ source venv/bin/activate
 ```
-2. Now we execute the following command to start the Flask server
+8. Now we execute the following command to start the Flask server
 
 ```
 $ flask --app App_alquiler_coches run --host 0.0.0.0 --port=8080
 ```
-3. Open the browser and type the following URL
+9. Open the browser and type the following URL
 
 ```
 http://localhost:8080
@@ -65,10 +95,10 @@ http://localhost:8080
 
 you should see something like this:
 
-![Texto alternativo](./images/Capture_index.png)
+![Index](./images/Capture_index.png)
 
 
-4. To exit the virtaul environment you must use the following command
+10. To exit the virtaul environment you must use the following command
 
 ```
 $ deactivate
