@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{% block title %} Empleados {% endblock %}</h1>
+
+<table class="tabla-empleados">
+    <thead>
+        <tr>
+            <th>ID Empleado</th>
+            <th>ID Agencia</th>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empleado in empleado %}
+        <tr>
+            <td>{{ empleado[0] }}</td>
+            <td>{{ empleado[1] }}</td>
+            <td>{{ empleado[2] }}</td>
+            <td>{{ empleado[3] }}</td>
+            <td>{{ empleado[4] }}</td>
+            <td>{{ empleado[5] }}</td>
+            <td>{{ empleado[6] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    <style>
+        .tabla-empleados {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .tabla-empleados th,
+        .tabla-empleados td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .tabla-empleados tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .tabla-empleados tr:hover {
+            background-color: #ddd;
+        }
+        .tabla-empleados th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4caf50;
+            color: white;
+        }
+    </style>
+{% endblock %}
