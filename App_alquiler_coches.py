@@ -127,3 +127,31 @@ def update_vehiculo():
         return redirect(url_for('index'))
 
     return render_template('update_vehiculo.html')
+
+@app.route('/add_cliente', methods=('GET', 'POST'))
+def add_cliente():
+    if request.method == 'POST':
+        if request.form['codigo_cliente_avalista'] == '':
+            codigo_cliente_avalista = None
+        else:
+            codigo_cliente_avalista = request.form['codigo_cliente_avalista']
+        
+        dni = request.form['dni']
+        nombre = request.form['nombre']
+        apellidos = request.form['apellidos']
+        telefono = request.form['telefono']
+        direccion = request.form['direccion']
+        
+        if request.form['email'] == '':
+            email = None
+        else:
+            email = request.form['email']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('INSERT INTO cliente (codigo_cliente_avalista, dni, nombre, apellidos, telefono, direccion, email) VALUES (%s, %s, %s, %s, %s, %s, %s)', (codigo_cliente_avalista, dni, nombre, apellidos, telefono, direccion, email))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('clientes'))
+
+    return render_template('add_cliente.html')

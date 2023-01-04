@@ -169,6 +169,16 @@ CREATE OR REPLACE FUNCTION check_n_vehiculos_delete() RETURNS TRIGGER AS $$
     END;
 $$ LANGUAGE plpgsql;
 
+-- Al eliminar un vehiculo que no se encuentra en la tabla vehiculo lanza una excepción mostrando el mensaje 'El vehículo no existe'
+CREATE OR REPLACE FUNCTION check_vehiculo_delete_exists() RETURNS TRIGGER AS $$
+    BEGIN
+        IF NOT EXISTS (SELECT 1 FROM vehiculo WHERE matricula = OLD.matricula) THEN
+            RAISE EXCEPTION 'El vehículo que se quiere eliminar no existe';
+        END IF;
+        RETURN OLD;
+    END;
+$$ LANGUAGE plpgsql;
+    
 
 ----------Creación de disparadores----------
 
@@ -201,6 +211,11 @@ CREATE TRIGGER check_n_vehiculos_delete
     AFTER DELETE ON Vehiculo
     FOR EACH ROW
     EXECUTE PROCEDURE check_n_vehiculos_delete();
+
+CREATE TRIGGER check_vehiculo_delete_exists
+    BEFORE DELETE ON Vehiculo
+    FOR EACH ROW
+    EXECUTE PROCEDURE check_vehiculo_delete_exists();
 
 
 ----------Inserción de registros correctos----------
