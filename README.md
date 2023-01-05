@@ -27,7 +27,7 @@ In the next section, it will be explained in more detail.
 1. The first step is to clone the repository
 
 ```
-$ git clone [link]
+$ git clone git@github.com:Fabrizzioperilli/Rent-a-car.git
 ```
 2. Check the version of Python you have on your computer, it must be equal to or greater than 3.8.
 ```
