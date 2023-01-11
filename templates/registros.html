@@ -1,48 +1,51 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <h1>{% block title %} Registros {% endblock %}</h1>
 <table class="tabla-involucra">
-    <thead>
-        <tr>
-            <th>ID Reserva</th>
-            <th>ID Empleado</th>
-            <th>Matricula</th>
-            <th>Precio Vehículo</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for involucra in involucra %}
-        <tr>
-            <td>{{ involucra[0] }}</td>
-            <td>{{ involucra[1] }}</td>
-            <td>{{ involucra[2] }}</td>
-            <td>{{ involucra[3] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>ID Reserva</th>
+      <th>ID Empleado</th>
+      <th>Matricula</th>
+      <th>Precio Vehículo</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for involucra in involucra %}
+    <tr>
+      <td>{{ involucra[0] }}</td>
+      <td>{{ involucra[1] }}</td>
+      <td>{{ involucra[2] }}</td>
+      <td>{{ involucra[3] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-    <style>
-        .tabla-involucra {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .tabla-involucra th,
-        .tabla-involucra td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        .tabla-involucra tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .tabla-involucra tr:hover {
-            background-color: #ddd;
-        }
-        .tabla-involucra th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #4caf50;
-            color: white;
-        }
-    </style>
+<style>
+  .tabla-involucra {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .tabla-involucra th,
+  .tabla-involucra td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .tabla-involucra tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .tabla-involucra tr:hover {
+    background-color: #ddd;
+  }
+  .tabla-involucra th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4caf50;
+    color: white;
+  }
+  h1 {
+    text-align: center;
+    font-family: "Lucida Sans";
+  }
+</style>
 {% endblock %}

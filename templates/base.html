@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>{% block title %} {% endblock %} Rent a Car</title>
 
     <center>
-      <img src="https://t3.ftcdn.net/jpg/01/14/62/32/360_F_114623212_ULMjI6ljcl9aLt9cxDrnOyEZwCf0FRDa.jpg" width="450px" weight="350px" alt="Logo" title="Logo">
+      <img
+        src="https://t3.ftcdn.net/jpg/01/14/62/32/360_F_114623212_ULMjI6ljcl9aLt9cxDrnOyEZwCf0FRDa.jpg"
+        width="450px"
+        weight="350px"
+        alt="Logo"
+        title="Logo"
+      />
     </center>
-    
+
     <h1 class="title">Rent a Car</h1>
     <style>
-        .title {
-            text-align: center;
-            font-size: 60px;
-            color: #4caf50;
-            font-family: 'Lucida Sans';
-        }
-        nav a {
-            color: #4caf50;
-            font-size: 35px;
-            margin-left: 60px;
-            text-decoration: none;
-            font-family: system-ui;
-        }
-        nav a:hover {
-            background-color: #4caf50;
-            opacity: 0.5;
-            color: white;      
-        }
-        
-        </style>
-</head>
-<body>
+      .title {
+        text-align: center;
+        font-size: 60px;
+        color: #4caf50;
+        font-family: "Lucida Sans";
+      }
+      nav a {
+        color: #4caf50;
+        font-size: 35px;
+        margin-left: 60px;
+        text-decoration: none;
+        font-family: system-ui;
+      }
+      nav a:hover {
+        background-color: #4caf50;
+        opacity: 0.5;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
     <nav>
       <a href="{{ url_for('index') }}">Vehículos</a>
       <a href="{{ url_for('agencias') }}">Agencias</a>
@@ -40,11 +45,8 @@
       <a href="{{ url_for('clientes') }}">Clientes</a>
       <a href="{{ url_for('reservas') }}">Reservas</a>
       <a href="{{ url_for('registros') }}">Registros</a>
-
     </nav>
-    <br>
-    <div class="content">
-      {% block content %} {% endblock %}
-    </div>
-</body>
+    <br />
+    <div class="content">{% block content %} {% endblock %}</div>
+  </body>
 </html>

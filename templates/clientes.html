@@ -1,78 +1,111 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>{% block title %} Clientes {% endblock %}</h1>
 <table class="tabla-clientes">
-    <thead>
-        <tr>
-
-            <th>ID Cliente</th>
-            <th>ID Cliente Avalista</th>
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Telefono</th>
-            <th>Dirección</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for cliente in cliente %}
-        <tr>
-            <td>{{ cliente[0] }}</td>
-            <td>{{ cliente[1] }}</td>
-            <td>{{ cliente[2] }}</td>
-            <td>{{ cliente[3] }}</td>
-            <td>{{ cliente[4] }}</td>
-            <td>{{ cliente[5] }}</td>
-            <td>{{ cliente[6] }}</td>
-            <td>{{ cliente[7] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>ID Cliente</th>
+      <th>ID Cliente Avalista</th>
+      <th>DNI</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Telefono</th>
+      <th>Dirección</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cliente in cliente %}
+    <tr>
+      <td>{{ cliente[0] }}</td>
+      <td>{{ cliente[1] }}</td>
+      <td>{{ cliente[2] }}</td>
+      <td>{{ cliente[3] }}</td>
+      <td>{{ cliente[4] }}</td>
+      <td>{{ cliente[5] }}</td>
+      <td>{{ cliente[6] }}</td>
+      <td>{{ cliente[7] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-    <style>
-        .tabla-clientes {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .tabla-clientes th,
-        .tabla-clientes td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        .tabla-clientes tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .tabla-clientes tr:hover {
-            background-color: #ddd;
-        }
-        .tabla-clientes th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #4caf50;
-            color: white;
-        }
-    </style>
+<style>
+  .tabla-clientes {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .tabla-clientes th,
+  .tabla-clientes td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .tabla-clientes tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .tabla-clientes tr:hover {
+    background-color: #ddd;
+  }
+  .tabla-clientes th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4caf50;
+    color: white;
+  }
+  h1 {
+    text-align: center;
+    font-family: "Lucida Sans";
+  }
+</style>
 
-    <br>
-    <nav>
-    <a href="{{ url_for('add_cliente') }}" class="buttom_add_cliente">Añadir cliente</a>
-    </nav>
-    <style>
-    .buttom_add_cliente {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 20px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-    </style>
+<br />
+<nav>
+  <a href="{{ url_for('add_cliente') }}" class="buttom_add_cliente"
+    >Añadir cliente</a
+  >
+  <a href="{{ url_for('delete_cliente') }}" class="buttom_delete_cliente"
+    >Eliminar cliente</a
+  >
+  <a href="{{ url_for('update_cliente') }}" class="buttom_update_cliente"
+    >Actualizar cliente</a
+  >
+</nav>
+<style>
+  .buttom_add_cliente {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .buttom_delete_cliente {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .buttom_update_cliente {
+    background-color: #008cba;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+</style>
 {% endblock %}

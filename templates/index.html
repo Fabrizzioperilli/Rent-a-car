@@ -1,103 +1,111 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <h1>{% block title %} Vehículos {% endblock %}</h1>
-    <table class="tabla-vehiculos">
-        <thead>
-            <tr>
-                <th>Matricula</th>
-                <th>Garaje</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Color</th>
-                <th>Año</th>
-                <th>Kilómetros</th>
-                <th>Tipo</th>
-                <th>Disponible</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for vehiculo in vehiculo %}
-            <tr>
-                <td>{{ vehiculo[0] }}</td>
-                <td>{{ vehiculo[1] }}</td>
-                <td>{{ vehiculo[2] }}</td>
-                <td>{{ vehiculo[3] }}</td>
-                <td>{{ vehiculo[4] }}</td>
-                <td>{{ vehiculo[5] }}</td>
-                <td>{{ vehiculo[6] }}</td>
-                <td>{{ vehiculo[7] }}</td>
-                <td>{{ vehiculo[8] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <style>
-        .tabla-vehiculos {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .tabla-vehiculos th,
-        .tabla-vehiculos td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        .tabla-vehiculos tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .tabla-vehiculos tr:hover {
-            background-color: #ddd;
-        }
-        .tabla-vehiculos th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #4caf50;
-            color: white;
-        }
-    </style>
-    <br>
-    <nav>
-        <a href="{{ url_for('add_vehiculo') }}" class="buttom_add_vehiculo">Añadir vehiculo</a>
-        <a href="{{ url_for('delete_vehiculo') }}" class="buttom_delete_vehiculo">Eliminar vehiculo</a>
-        <a href="{{ url_for('update_vehiculo') }}" class="buttom_update_vehiculo">Actualizar vehiculo</a>
-    </nav>
-    <style>
-        .buttom_add_vehiculo {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 20px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        .buttom_delete_vehiculo {
-            background-color: #f44336;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 20px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        .buttom_update_vehiculo {
-            background-color: #008CBA;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 20px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-    </style>
+<table class="tabla-vehiculos">
+  <thead>
+    <tr>
+      <th>Matricula</th>
+      <th>Garaje</th>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Color</th>
+      <th>Año</th>
+      <th>Kilómetros</th>
+      <th>Tipo</th>
+      <th>Disponible</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for vehiculo in vehiculo %}
+    <tr>
+      <td>{{ vehiculo[0] }}</td>
+      <td>{{ vehiculo[1] }}</td>
+      <td>{{ vehiculo[2] }}</td>
+      <td>{{ vehiculo[3] }}</td>
+      <td>{{ vehiculo[4] }}</td>
+      <td>{{ vehiculo[5] }}</td>
+      <td>{{ vehiculo[6] }}</td>
+      <td>{{ vehiculo[7] }}</td>
+      <td>{{ vehiculo[8] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<style>
+  .tabla-vehiculos {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .tabla-vehiculos th,
+  .tabla-vehiculos td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .tabla-vehiculos tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .tabla-vehiculos tr:hover {
+    background-color: #ddd;
+  }
+  .tabla-vehiculos th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4caf50;
+    color: white;
+  }
+  h1 {
+    text-align: center;
+    font-family: 'Lucida Sans';
+  }
+</style>
+<br />
+<nav>
+  <a href="{{ url_for('add_vehiculo') }}" class="buttom_add_vehiculo"
+    >Añadir vehiculo</a
+  >
+  <a href="{{ url_for('delete_vehiculo') }}" class="buttom_delete_vehiculo"
+    >Eliminar vehiculo</a
+  >
+  <a href="{{ url_for('update_vehiculo') }}" class="buttom_update_vehiculo"
+    >Actualizar vehiculo</a
+  >
+</nav>
+<style>
+  .buttom_add_vehiculo {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .buttom_delete_vehiculo {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .buttom_update_vehiculo {
+    background-color: #008cba;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+</style>
 {% endblock %}

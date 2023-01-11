@@ -1,56 +1,59 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <h1>{% block title %} Reservas {% endblock %}</h1>
 <table class="tabla-reservas">
-    <thead>
-        <tr>
-            <th>ID Reserva</th>
-            <th>ID Cliente</th>
-            <th>Precio Total</th>
-            <th>Tipo Seguro</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-            <th>Combustible (Litros)</th>
-            <th>Entregado</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for reserva in reserva %}
-        <tr>
-            <td>{{ reserva[0] }}</td>
-            <td>{{ reserva[1] }}</td>
-            <td>{{ reserva[2] }}</td>
-            <td>{{ reserva[3] }}</td>
-            <td>{{ reserva[4] }}</td>
-            <td>{{ reserva[5] }}</td>
-            <td>{{ reserva[6] }}</td>
-            <td>{{ reserva[7] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>ID Reserva</th>
+      <th>ID Cliente</th>
+      <th>Precio Total</th>
+      <th>Tipo Seguro</th>
+      <th>Fecha Inicio</th>
+      <th>Fecha Fin</th>
+      <th>Combustible (Litros)</th>
+      <th>Entregado</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for reserva in reserva %}
+    <tr>
+      <td>{{ reserva[0] }}</td>
+      <td>{{ reserva[1] }}</td>
+      <td>{{ reserva[2] }}</td>
+      <td>{{ reserva[3] }}</td>
+      <td>{{ reserva[4] }}</td>
+      <td>{{ reserva[5] }}</td>
+      <td>{{ reserva[6] }}</td>
+      <td>{{ reserva[7] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-    <style>
-        .tabla-reservas {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .tabla-reservas th,
-        .tabla-reservas td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        .tabla-reservas tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .tabla-reservas tr:hover {
-            background-color: #ddd;
-        }
-        .tabla-reservas th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #4caf50;
-            color: white;
-        }
-    </style>
+<style>
+  .tabla-reservas {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .tabla-reservas th,
+  .tabla-reservas td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .tabla-reservas tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .tabla-reservas tr:hover {
+    background-color: #ddd;
+  }
+  .tabla-reservas th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4caf50;
+    color: white;
+  }
+  h1 {
+    text-align: center;
+    font-family: "Lucida Sans";
+  }
+</style>
 {% endblock %}

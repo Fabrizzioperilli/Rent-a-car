@@ -1,84 +1,76 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <form method="post">
   <h2>Añadir cliente</h2>
   <p>
     <label for="nombre">Nombre</label>
-    <input type="text" name="nombre"
-                        placeholder="Nombre">
+    <input type="text" name="nombre" placeholder="Nombre" />
   </p>
   <p>
     <label for="apellidos">Apellidos</label>
-    <input type="text" name="apellidos"
-                        placeholder="Apellidos">
+    <input type="text" name="apellidos" placeholder="Apellidos" />
   </p>
   <p>
     <label for="dni">DNI</label>
-    <input type="text" name="dni"
-                        placeholder="DNI">
+    <input type="text" name="dni" placeholder="DNI" />
   </p>
   <p>
     <label for="direccion">Direccion</label>
-    <input type="text" name="direccion"
-                        placeholder="Direccion">
+    <input type="text" name="direccion" placeholder="Direccion" />
   </p>
   <p>
     <label for="telefono">Telefono</label>
-    <input type="text" name="telefono"
-                        placeholder="Telefono">
+    <input type="text" name="telefono" placeholder="Telefono" />
   </p>
   <p>
     <label for="email">Email</label>
-    <input type="text" name="email" value="">
+    <input type="text" name="email" value="" />
   </p>
   <p>
     <label for="codigo_cliente_avalista">Codigo cliente avalista</label>
-    <input type="number" name="codigo_cliente_avalista" value="">
+    <input type="number" name="codigo_cliente_avalista" value="" />
   </p>
   <p>
     <button type="submit">Añadir</button>
   </p>
-
 </form>
 
 <style>
   form {
-      width: 50%;
-      margin: 0 auto;
-    }
+    width: 50%;
+    margin: 0 auto;
+  }
 
-    input {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-    button {
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+  button {
+    width: 100%;
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 
-    button:hover {
-      background-color: #45a049;
-    }
+  button:hover {
+    background-color: #45a049;
+  }
 
-    form {
-      border-radius: 5px;
-      background-color: #f2f2f2;
-      padding: 20px;
-    }
+  form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
 </style>
 
 {% endblock %}

@@ -1,48 +1,51 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <h1>{% block title %} Agencias {% endblock %}</h1>
 <table class="tabla-agencias">
-    <thead>
-        <tr>
-            <th>ID Agencia</th>
-            <th>Dirección</th>
-            <th>Telefono</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for agencia in agencia %}
-        <tr>
-            <td>{{ agencia[0] }}</td>
-            <td>{{ agencia[1] }}</td>
-            <td>{{ agencia[2] }}</td>
-            <td>{{ agencia[3] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>ID Agencia</th>
+      <th>Dirección</th>
+      <th>Telefono</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for agencia in agencia %}
+    <tr>
+      <td>{{ agencia[0] }}</td>
+      <td>{{ agencia[1] }}</td>
+      <td>{{ agencia[2] }}</td>
+      <td>{{ agencia[3] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-    <style>
-        .tabla-agencias {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .tabla-agencias th,
-        .tabla-agencias td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        .tabla-agencias tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .tabla-agencias tr:hover {
-            background-color: #ddd;
-        }
-        .tabla-agencias th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #4caf50;
-            color: white;
-        }
-    </style>
+<style>
+  .tabla-agencias {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .tabla-agencias th,
+  .tabla-agencias td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .tabla-agencias tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .tabla-agencias tr:hover {
+    background-color: #ddd;
+  }
+  .tabla-agencias th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4caf50;
+    color: white;
+  }
+  h1 {
+    text-align: center;
+    font-family: "Lucida Sans";
+  }
+</style>
 {% endblock %}

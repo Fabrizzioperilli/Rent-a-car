@@ -4,14 +4,16 @@ from flask import Flask, render_template, request, url_for, redirect
 
 app = Flask(__name__)
 
+
 def get_db_connection():
     conn = psycopg2.connect(host='localhost',
-        	database="alquiler_coches",
-          # user=os.environ['DB_USERNAME'],
-		      user="postgres",
-		      # password=os.environ['DB_PASSWORD']
-          password="postgres")
+                            database="alquiler_coches",
+                            # user=os.environ['DB_USERNAME'],
+                            user="postgres",
+                            # password=os.environ['DB_PASSWORD']
+                            password="postgres")
     return conn
+
 
 @app.route('/')
 def index():
@@ -20,6 +22,7 @@ def index():
     vehiculo.execute('SELECT * FROM vehiculo')
     return render_template('index.html', vehiculo=vehiculo)
 
+
 @app.route('/clientes')
 def clientes():
     conn = get_db_connection()
@@ -27,12 +30,14 @@ def clientes():
     cliente.execute('SELECT * FROM cliente')
     return render_template('clientes.html', cliente=cliente)
 
+
 @app.route('/reservas')
 def reservas():
     conn = get_db_connection()
     reserva = conn.cursor()
     reserva.execute('SELECT * FROM reserva ORDER BY codigo_reserva')
     return render_template('reservas.html', reserva=reserva)
+
 
 @app.route('/registros')
 def registros():
@@ -49,12 +54,14 @@ def agencias():
     agencia.execute('SELECT * FROM agencia')
     return render_template('agencias.html', agencia=agencia)
 
+
 @app.route('/empleados')
 def empleados():
     conn = get_db_connection()
     empleado = conn.cursor()
     empleado.execute('SELECT * FROM empleado')
     return render_template('empleados.html', empleado=empleado)
+
 
 @app.route('/garajes')
 def garajes():
@@ -76,10 +83,11 @@ def add_vehiculo():
         kilometros = request.form['kilometros']
         tipo = request.form['tipo']
         disponible = request.form['disponible']
-        
+
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('INSERT INTO vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible))
+        cur.execute('INSERT INTO vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
+                    (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible))
         conn.commit()
         cur.close()
         conn.close()
@@ -87,7 +95,9 @@ def add_vehiculo():
 
     return render_template('add_vehiculo.html')
 
-    #Eliminar un vehiculo 
+    # Eliminar un vehiculo
+
+
 @app.route('/delete_vehiculo/', methods=('GET', 'POST'))
 def delete_vehiculo():
     if request.method == 'POST':
@@ -104,7 +114,9 @@ def delete_vehiculo():
 
     return render_template('delete_vehiculo.html')
 
-    #Modificar un vehiculo
+    # Modificar un vehiculo
+
+
 @app.route('/update_vehiculo', methods=('GET', 'POST'))
 def update_vehiculo():
     if request.method == 'POST':
@@ -117,16 +129,18 @@ def update_vehiculo():
         kilometros = request.form['kilometros']
         tipo = request.form['tipo']
         disponible = request.form['disponible']
-        
+
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('UPDATE vehiculo SET codigo_garaje = %s, marca = %s, modelo = %s, color = %s, año = %s, kilometros = %s, tipo = %s, disponible = %s WHERE matricula = %s', (codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible, matricula))
+        cur.execute('UPDATE vehiculo SET codigo_garaje = %s, marca = %s, modelo = %s, color = %s, año = %s, kilometros = %s, tipo = %s, disponible = %s WHERE matricula = %s',
+                    (codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible, matricula))
         conn.commit()
         cur.close()
         conn.close()
         return redirect(url_for('index'))
 
     return render_template('update_vehiculo.html')
+
 
 @app.route('/add_cliente', methods=('GET', 'POST'))
 def add_cliente():
@@ -135,23 +149,73 @@ def add_cliente():
             codigo_cliente_avalista = None
         else:
             codigo_cliente_avalista = request.form['codigo_cliente_avalista']
-        
+
         dni = request.form['dni']
         nombre = request.form['nombre']
         apellidos = request.form['apellidos']
         telefono = request.form['telefono']
         direccion = request.form['direccion']
-        
+
         if request.form['email'] == '':
             email = None
         else:
             email = request.form['email']
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('INSERT INTO cliente (codigo_cliente_avalista, dni, nombre, apellidos, telefono, direccion, email) VALUES (%s, %s, %s, %s, %s, %s, %s)', (codigo_cliente_avalista, dni, nombre, apellidos, telefono, direccion, email))
+        cur.execute('INSERT INTO cliente (codigo_cliente_avalista, dni, nombre, apellidos, telefono, direccion, email) VALUES (%s, %s, %s, %s, %s, %s, %s)',
+                    (codigo_cliente_avalista, dni, nombre, apellidos, telefono, direccion, email))
         conn.commit()
         cur.close()
         conn.close()
         return redirect(url_for('clientes'))
 
     return render_template('add_cliente.html')
+
+
+@app.route('/delete_cliente/', methods=('GET', 'POST'))
+def delete_cliente():
+    if request.method == 'POST':
+        codigo_cliente = request.form['codigo_cliente']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('DELETE FROM cliente WHERE codigo_cliente = %s',
+                    (codigo_cliente,))
+        if cur.rowcount == 0:
+            return render_template('delete_cliente.html', error='No existe el cliente')
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('clientes'))
+
+    return render_template('delete_cliente.html')
+
+
+@app.route('/update_cliente', methods=('GET', 'POST'))
+def update_cliente():
+    if request.method == 'POST':
+        if request.form['codigo_cliente_avalista'] == '':
+            codigo_cliente_avalista = None
+        else:
+            codigo_cliente_avalista = request.form['codigo_cliente_avalista']
+
+        codigo_cliente = request.form['codigo_cliente']
+        dni = request.form['dni']
+        nombre = request.form['nombre']
+        apellidos = request.form['apellidos']
+        telefono = request.form['telefono']
+        direccion = request.form['direccion']
+
+        if request.form['email'] == '':
+            email = None
+        else:
+            email = request.form['email']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('UPDATE cliente SET codigo_cliente_avalista = %s, dni = %s, nombre = %s, apellidos = %s, telefono = %s, direccion = %s, email = %s WHERE codigo_cliente = %s',
+                    (codigo_cliente_avalista, dni, nombre, apellidos, telefono, direccion, email, codigo_cliente))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('clientes'))
+
+    return render_template('update_cliente.html')

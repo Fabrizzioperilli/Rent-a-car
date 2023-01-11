@@ -1,52 +1,54 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>{% block title %} Garajes {% endblock %}</h1>
 <table class="tabla-garajes">
-    <thead>
-        <tr>
-            <th>ID Garaje</th>
-            <th>ID Agencia</th>
-            <th>Dirección</th>
-            <th>Vehículos Almacenados</th>
-            <th>Capacidad Máxima</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        {% for garaje in garaje %}
-        <tr>
-            <td>{{ garaje[0] }}</td>
-            <td>{{ garaje[1] }}</td>
-            <td>{{ garaje[2] }}</td>
-            <td>{{ garaje[3] }}</td>
-            <td>{{ garaje[4] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>ID Garaje</th>
+      <th>ID Agencia</th>
+      <th>Dirección</th>
+      <th>Vehículos Almacenados</th>
+      <th>Capacidad Máxima</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for garaje in garaje %}
+    <tr>
+      <td>{{ garaje[0] }}</td>
+      <td>{{ garaje[1] }}</td>
+      <td>{{ garaje[2] }}</td>
+      <td>{{ garaje[3] }}</td>
+      <td>{{ garaje[4] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-    <style>
-        .tabla-garajes {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .tabla-garajes th,
-        .tabla-garajes td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        .tabla-garajes tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .tabla-garajes tr:hover {
-            background-color: #ddd;
-        }
-        .tabla-garajes th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #4caf50;
-            color: white;
-        }
-    </style>
+<style>
+  .tabla-garajes {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .tabla-garajes th,
+  .tabla-garajes td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .tabla-garajes tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .tabla-garajes tr:hover {
+    background-color: #ddd;
+  }
+  .tabla-garajes th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4caf50;
+    color: white;
+  }
+  h1 {
+    text-align: center;
+    font-family: "Lucida Sans";
+  }
+</style>
 {% endblock %}
