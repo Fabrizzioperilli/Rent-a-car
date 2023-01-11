@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS Vahiculo;
 DROP TABLE IF EXISTS Involucra;
 DROP TABLE IF EXISTS Reserva;
 DROP TABLE IF EXISTS Cliente;
+DROP TABLE IF EXISTS Factura;
 
 ----------Creación de tablas----------
 
@@ -75,7 +76,7 @@ CREATE TABLE Reserva(
     codigo_reserva INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     codigo_cliente INTEGER NOT NULL,
     precio_total FLOAT DEFAULT NULL,
-    tipo_seguro VARCHAR(45) NOT NULL CHECK (tipo_seguro IN ('completo','Completo','COMPLETO', 'terceros','Terceros','TERCEROS')),
+    tipo_seguro VARCHAR(45) NOT NULL CHECK (tipo_seguro IN ('Completo', 'Terceros')),
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL CHECK (fecha_fin > fecha_inicio),
     combustible_litros FLOAT NOT NULL CHECK (combustible_litros > 0),
@@ -92,6 +93,14 @@ CREATE TABLE Involucra(
     FOREIGN KEY (codigo_empleado) REFERENCES Empleado(codigo_empleado),
     FOREIGN KEY (codigo_reserva) REFERENCES Reserva(codigo_reserva),
     PRIMARY KEY (codigo_reserva, codigo_empleado, matricula)
+);
+
+CREATE TABLE Factura(
+    codigo_factura INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    codigo_reserva INTEGER NOT NULL,
+    fecha DATE NOT NULL,
+    importe FLOAT DEFAULT 0 CHECK (importe >= 0),
+    FOREIGN KEY (codigo_reserva) REFERENCES Reserva(codigo_reserva)
 );
 
 ----------Creación de funciones----------
@@ -169,16 +178,26 @@ CREATE OR REPLACE FUNCTION check_n_vehiculos_delete() RETURNS TRIGGER AS $$
     END;
 $$ LANGUAGE plpgsql;
 
--- Al eliminar un vehiculo que no se encuentra en la tabla vehiculo lanza una excepción mostrando el mensaje 'El vehículo no existe'
-CREATE OR REPLACE FUNCTION check_vehiculo_delete_exists() RETURNS TRIGGER AS $$
+
+-- Al crear una reserva se crea una nueva factura con el precio total de la reserva como el importe de la factura, el codigo de la reserva y la fecha actual del sistema
+CREATE OR REPLACE FUNCTION check_factura_reserva_insert() RETURNS TRIGGER AS $$
+    DECLARE
+        fecha_actual DATE;
     BEGIN
-        IF NOT EXISTS (SELECT 1 FROM vehiculo WHERE matricula = OLD.matricula) THEN
-            RAISE EXCEPTION 'El vehículo que se quiere eliminar no existe';
-        END IF;
-        RETURN OLD;
+        SELECT CURRENT_DATE INTO fecha_actual;
+        INSERT INTO factura (importe, codigo_reserva, fecha) VALUES (NEW.precio_total * 1.07, NEW.codigo_reserva, fecha_actual);
+        RETURN NEW;
     END;
 $$ LANGUAGE plpgsql;
-    
+
+
+-- Al actulizar el precio total de una reserva actulizar tambien en el importe de la factura
+CREATE OR REPLACE FUNCTION check_factura_reserva_update() RETURNS TRIGGER AS $$
+    BEGIN
+        UPDATE factura SET importe = NEW.precio_total * 1.07 WHERE codigo_reserva = NEW.codigo_reserva;
+        RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
 
 ----------Creación de disparadores----------
 
@@ -212,10 +231,15 @@ CREATE TRIGGER check_n_vehiculos_delete
     FOR EACH ROW
     EXECUTE PROCEDURE check_n_vehiculos_delete();
 
-CREATE TRIGGER check_vehiculo_delete_exists
-    BEFORE DELETE ON Vehiculo
+CREATE TRIGGER check_factura_reserva_insert
+    AFTER INSERT ON Reserva
     FOR EACH ROW
-    EXECUTE PROCEDURE check_vehiculo_delete_exists();
+    EXECUTE PROCEDURE check_factura_reserva_insert();
+
+CREATE TRIGGER check_factura_reserva_update
+    AFTER UPDATE ON Reserva
+    FOR EACH ROW
+    EXECUTE PROCEDURE check_factura_reserva_update();
 
 
 ----------Inserción de registros correctos----------
@@ -272,3 +296,5 @@ select * from involucra;
 UPDATE reserva SET entregado = true WHERE codigo_reserva = 1;
 
 DELETE FROM Vehiculo WHERE matricula = '1234ABG';
+
+select * from factura;
