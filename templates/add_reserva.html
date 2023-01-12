@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% block content %}
+
+<form method="post">
+  <h2>Añadir una nueva reserva</h2>
+  <p>
+    <label for="codigo_cliente">Codigo Cliente</label>
+    <input type="number" name="codigo_cliente" placeholder="Codigo Cliente" />
+  </p>
+  <p>
+    <label for="tipo_seguro">Tipo de Seguro</label>
+    <select name="tipo_seguro">
+      <option value="Completo">Completo</option>
+      <option value="Terceros">Terceros</option>
+    </select>
+  </p>
+  <p>
+    <label for="fecha_inicio">Fecha Inicio</label>
+    <input type="date" name="fecha_inicio" placeholder="Fecha Inicio" />
+  </p>
+  <p>
+    <label for="fecha_fin">Fecha Fin</label>
+    <input type="date" name="fecha_fin" placeholder="Fecha Fin" />
+  </p>
+  <p>
+    <label for="combustible_litros">Combustible Litros</label>
+    <input
+      type="number"
+      name="combustible_litros"
+      placeholder="Combustible Litros"
+    />
+  </p>
+  <p>
+    <button type="submit">Añadir</button>
+  </p>
+</form>
+<style>
+  form {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+</style>
+{% endblock %}

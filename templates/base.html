@@ -25,7 +25,7 @@
       nav a {
         color: #4caf50;
         font-size: 35px;
-        margin-left: 60px;
+        margin-left: 40px;
         text-decoration: none;
         font-family: system-ui;
       }
@@ -37,15 +37,19 @@
     </style>
   </head>
   <body>
-    <nav>
-      <a href="{{ url_for('index') }}">Vehículos</a>
-      <a href="{{ url_for('agencias') }}">Agencias</a>
-      <a href="{{ url_for('garajes') }}">Garajes</a>
-      <a href="{{ url_for('empleados') }}">Empleados</a>
-      <a href="{{ url_for('clientes') }}">Clientes</a>
-      <a href="{{ url_for('reservas') }}">Reservas</a>
-      <a href="{{ url_for('registros') }}">Registros</a>
-    </nav>
+    <center>
+      <nav>
+        <a href="{{ url_for('index') }}">Vehículos</a>
+        <a href="{{ url_for('agencias') }}">Agencias</a>
+        <a href="{{ url_for('garajes') }}">Garajes</a>
+        <a href="{{ url_for('empleados') }}">Empleados</a>
+        <a href="{{ url_for('clientes') }}">Clientes</a>
+        <a href="{{ url_for('reservas') }}">Reservas</a>
+        <a href="{{ url_for('registros') }}">Registros</a>
+        <a href="{{ url_for('facturas') }}">Facturas</a>
+  
+      </nav>
+    </center>
     <br />
     <div class="content">{% block content %} {% endblock %}</div>
   </body>

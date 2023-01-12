@@ -1,6 +1,8 @@
 import os
 import psycopg2
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, abort, render_template, request, url_for, redirect
+from datetime import datetime
+
 
 app = Flask(__name__)
 
@@ -70,7 +72,14 @@ def garajes():
     garaje.execute('SELECT * FROM garaje ORDER BY codigo_garaje')
     return render_template('garajes.html', garaje=garaje)
 
-
+@app.route('/facturas')
+def facturas():
+    conn = get_db_connection()
+    factura = conn.cursor()
+    factura.execute('SELECT * FROM factura')
+    return render_template('facturas.html', factura=factura)
+    
+    
 @app.route('/add_vehiculo', methods=('GET', 'POST'))
 def add_vehiculo():
     if request.method == 'POST':
@@ -95,9 +104,6 @@ def add_vehiculo():
 
     return render_template('add_vehiculo.html')
 
-    # Eliminar un vehiculo
-
-
 @app.route('/delete_vehiculo/', methods=('GET', 'POST'))
 def delete_vehiculo():
     if request.method == 'POST':
@@ -113,8 +119,6 @@ def delete_vehiculo():
         return redirect(url_for('index'))
 
     return render_template('delete_vehiculo.html')
-
-    # Modificar un vehiculo
 
 
 @app.route('/update_vehiculo', methods=('GET', 'POST'))
@@ -219,3 +223,48 @@ def update_cliente():
         return redirect(url_for('clientes'))
 
     return render_template('update_cliente.html')
+
+@app.route('/add_reserva', methods=('GET', 'POST'))
+def add_reserva():
+    if request.method == 'POST':
+        codigo_cliente = request.form['codigo_cliente']
+        precio_total = 0
+        tipo_seguro = request.form['tipo_seguro']
+
+        fecha_actual = datetime.now()
+        fecha_actual = fecha_actual.strftime("%Y-%m-%d")
+        if request.form['fecha_inicio'] != '':
+            if request.form['fecha_fin'] != '':
+                if (request.form['fecha_inicio'] < request.form['fecha_fin'] and request.form['fecha_inicio'] > fecha_actual):
+                    fecha_inicio = request.form['fecha_inicio']
+                    fecha_fin = request.form['fecha_fin']
+                else:
+                    return abort(400, 'Error en las fecha de inicio y/o fin')
+            else:
+                return abort(400, 'Error en la fecha de fin')
+        else:
+            return abort(400, 'Error en la fecha de inicio')
+        
+
+        if request.form['combustible_litros'] != '':
+            if request.form['combustible_litros'].isdigit():
+                if int(request.form['combustible_litros']) > 0:
+                    combustible_litros = request.form['combustible_litros']
+                else:
+                    return abort(400, 'Error en el numero de litros de combustible')
+            else:
+                return abort(400, 'Error en el numero de litros de combustible')
+
+
+        entregado = False
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('INSERT INTO reserva (codigo_cliente, precio_total, tipo_seguro, fecha_inicio, fecha_fin, combustible_litros, entregado) VALUES (%s, %s, %s, %s, %s, %s, %s)',
+                    (codigo_cliente, precio_total, tipo_seguro, fecha_inicio, fecha_fin, combustible_litros, entregado))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('reservas'))
+
+    return render_template('add_reserva.html')

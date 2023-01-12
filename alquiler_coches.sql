@@ -77,7 +77,7 @@ CREATE TABLE Reserva(
     codigo_cliente INTEGER NOT NULL,
     precio_total FLOAT DEFAULT NULL,
     tipo_seguro VARCHAR(45) NOT NULL CHECK (tipo_seguro IN ('Completo', 'Terceros')),
-    fecha_inicio DATE NOT NULL,
+    fecha_inicio DATE NOT NULL CHECK (fecha_inicio > CURRENT_DATE),
     fecha_fin DATE NOT NULL CHECK (fecha_fin > fecha_inicio),
     combustible_litros FLOAT NOT NULL CHECK (combustible_litros > 0),
     entregado BOOLEAN NOT NULL DEFAULT FALSE,

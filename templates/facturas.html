@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{% block title %} Facturas {% endblock %}</h1>
+<table class="tabla-facturas">
+  <thead>
+    <tr>
+      <th>ID Factura</th>
+      <th>ID Reserva</th>
+      <th>Fecha</th>
+      <th>Importe + IGIC</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for factura in factura %}
+    <tr>
+      <td>{{ factura[0] }}</td>
+      <td>{{ factura[1] }}</td>
+      <td>{{ factura[2] }}</td>
+      <td>{{ factura[3] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<style>
+  .tabla-facturas {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .tabla-facturas th,
+  .tabla-facturas td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .tabla-facturas tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .tabla-facturas tr:hover {
+    background-color: #ddd;
+  }
+  .tabla-facturas th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4caf50;
+    color: white;
+  }
+  h1 {
+    text-align: center;
+    font-family: "Lucida Sans";
+  }
+</style>
+{% endblock %}
