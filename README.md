@@ -115,3 +115,7 @@ Fabrizzio Daniell Perilli Martín alu0101138589@ull.edu.es
 ---
 ![GitHub repo size](https://img.shields.io/github/repo-size/FabrizzioPerilli/Rent-a-car)
 ![GitHub last commit](https://img.shields.io/github/last-commit/FabrizzioPerilli/Rent-a-car)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Fabrizzioperilli_Rent-a-car&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Fabrizzioperilli_Rent-a-car)
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=Fabrizzioperilli_Rent-a-car)
+
