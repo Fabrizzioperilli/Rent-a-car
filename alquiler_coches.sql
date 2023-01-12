@@ -271,7 +271,11 @@ INSERT INTO Vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilo
 INSERT INTO Vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES ('1234ABD', 1, 'Seat', 'Ibiza', 'Azul', 2015, 10000, 'Familiar', true);
 INSERT INTO Vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES ('1234ABE', 2, 'Seat', 'Ibiza', 'Verde', 2015, 10000, 'Sedan', true);
 INSERT INTO Vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES ('1234ABF', 3, 'Fiat', '500', 'Verde', 2020, 15000, 'Familiar', true);
-INSERT INTO Vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES ('1234ABG', 3, 'Fiat', '500', 'Rojo', 2020, 15000, 'Sedan', true);
+INSERT INTO Vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES ('1234ABG', 3, 'Fiat', '500', 'Rojo', 2016, 15000, 'Sedan', true);
+INSERT INTO Vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES ('1234ABH', 4, 'Audi', 'A7', 'Negro', 2018, 15000, 'Sedan', true);
+INSERT INTO Vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES ('1234ABI', 4, 'Jeep', 'Cherokee', 'Blanco', 2020, 15000, 'Todoterreno', true);
+INSERT INTO Vehiculo (matricula, codigo_garaje, marca, modelo, color, año, kilometros, tipo, disponible) VALUES ('1234ABJ', 5, 'Porsche', 'Panamera', 'Amarillo', 2020, 15000, 'Deportivo', true);
+
 
 select * from vehiculo;
 
@@ -284,11 +288,13 @@ select * from cliente;
 
 INSERT INTO Reserva (codigo_cliente, precio_total, tipo_seguro, fecha_inicio, fecha_fin, combustible_litros, entregado) VALUES (1, 100, 'Completo', '2025-12-12', '2025-12-20', 10, FALSE);
 INSERT INTO Reserva (codigo_cliente, precio_total, tipo_seguro, fecha_inicio, fecha_fin, combustible_litros, entregado) VALUES (2, 100, 'Completo', '2025-11-11', '2025-11-21', 10, FALSE);
+INSERT INTO Reserva (codigo_cliente, precio_total, tipo_seguro, fecha_inicio, fecha_fin, combustible_litros, entregado) VALUES (3, 100, 'Terceros', '2025-10-10', '2025-10-22', 10, FALSE);
 select * from reserva;
 
 INSERT INTO Involucra (codigo_reserva, codigo_empleado, matricula, precio_alquiler) VALUES (1, 1, '1234ABC', 100);
 INSERT INTO Involucra (codigo_reserva, codigo_empleado, matricula, precio_alquiler) VALUES (1, 2, '1234ABD', 150);
 INSERT INTO Involucra (codigo_reserva, codigo_empleado, matricula, precio_alquiler) VALUES (2, 3, '1234ABF', 200);
+INSERT INTO Involucra (codigo_reserva, codigo_empleado, matricula, precio_alquiler) VALUES (3, 1, '1234ABG', 250);
 
 select * from involucra;
 
