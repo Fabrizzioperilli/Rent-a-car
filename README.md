@@ -115,3 +115,5 @@ Fabrizzio Daniell Perilli Martín alu0101138589@ull.edu.es
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=Fabrizzioperilli_Rent-a-car)
 
+---
+
