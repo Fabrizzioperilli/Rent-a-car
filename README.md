@@ -41,11 +41,7 @@ In the virtual environment that this project has, Flask is already installed and
 
 ---
 ## Usage
-The first thing to do is load the database.
-
-1. 
-
-We need to activate the virtual environment, we follow the following steps:
+The first thing to do is load the database. We need to activate the virtual environment, we follow the following steps:
 
 1. We change to the postgres user with the command:
 ```
@@ -71,7 +67,7 @@ CREATE DATABASE alquiler_coches;
 ```
 \dti+
 ```
-![tables](./images/Capture_tables.png)
+![tables](./images/Tablas.png)
 
 7. We leave postgres and change the postgres user. Now the same working directory we execute the following command to activate the virtual environment
 ```
@@ -95,7 +91,7 @@ http://localhost:8080
 
 you should see something like this:
 
-![Index](./images/Capture_index.png)
+![Index](./images/index_vehiculos.png)
 
 
 10. To exit the virtaul environment you must use the following command
