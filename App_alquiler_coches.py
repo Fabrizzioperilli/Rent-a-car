@@ -136,7 +136,7 @@ def update_vehiculo():
 
         if not re.match("^[0-9]{4}[A-Z]{3}$", request.form['matricula']):
             return abort(404 , description="La matricula no cumple el formato")
-            
+
         matricula = request.form['matricula']
         codigo_garaje = request.form['codigo_garaje']
         marca = request.form['marca']
@@ -302,3 +302,57 @@ def delete_reserva():
         return redirect(url_for('reservas'))
 
     return render_template('delete_reserva.html')
+
+@app.route('/update_reserva', methods=('GET', 'POST'))
+def update_reserva():
+    if request.method == 'POST':
+        if request.form['codigo_reserva'] == '':
+            return abort(400, 'Error en el codigo de reserva')
+        
+        if request.form['codigo_cliente'] == '':
+            return abort(400, 'Error en el codigo de cliente')
+
+        codigo_reserva = request.form['codigo_reserva']
+        codigo_cliente = request.form['codigo_cliente']
+        
+        fecha_actual = datetime.now()
+        fecha_actual = fecha_actual.strftime("%Y-%m-%d")
+        if request.form['fecha_inicio'] != '':
+            if request.form['fecha_fin'] != '':
+                if (request.form['fecha_inicio'] < request.form['fecha_fin'] and request.form['fecha_inicio'] > fecha_actual):
+                    fecha_inicio = request.form['fecha_inicio']
+                    fecha_fin = request.form['fecha_fin']
+                else:
+                    return abort(400, 'Error en las fecha de inicio y/o fin')
+            else:
+                return abort(400, 'Error en la fecha de fin')
+        else:
+            return abort(400, 'Error en la fecha de inicio')
+        
+
+        if request.form['combustible_litros'] != '':
+            if request.form['combustible_litros'].isdigit():
+                if int(request.form['combustible_litros']) > 0:
+                    combustible_litros = request.form['combustible_litros']
+                else:
+                    return abort(400, 'Error en el numero de litros de combustible')
+            else:
+                return abort(400, 'Error en el numero de litros de combustible')
+
+        entregado = request.form['entregado']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('UPDATE reserva SET codigo_cliente = %s, fecha_inicio = %s, fecha_fin = %s, combustible_litros = %s, entregado = %s WHERE codigo_reserva = %s',
+                    (codigo_cliente, fecha_inicio, fecha_fin, combustible_litros, entregado, codigo_reserva))
+
+        if cur.rowcount == 0:
+            return abort(404, 'No existe la reserva que se quiere actualizar')
+
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('reservas'))
+
+    return render_template('update_reserva.html')
+
+
