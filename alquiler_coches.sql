@@ -91,7 +91,7 @@ CREATE TABLE Involucra(
     precio_alquiler FLOAT NOT NULL CHECK (precio_alquiler > 0),
     FOREIGN KEY (matricula) REFERENCES Vehiculo(matricula),
     FOREIGN KEY (codigo_empleado) REFERENCES Empleado(codigo_empleado),
-    FOREIGN KEY (codigo_reserva) REFERENCES Reserva(codigo_reserva),
+    FOREIGN KEY (codigo_reserva) REFERENCES Reserva(codigo_reserva) ON DELETE CASCADE,
     PRIMARY KEY (codigo_reserva, codigo_empleado, matricula)
 );
 
@@ -100,7 +100,7 @@ CREATE TABLE Factura(
     codigo_reserva INTEGER NOT NULL,
     fecha DATE NOT NULL,
     importe FLOAT DEFAULT 0 CHECK (importe >= 0),
-    FOREIGN KEY (codigo_reserva) REFERENCES Reserva(codigo_reserva)
+    FOREIGN KEY (codigo_reserva) REFERENCES Reserva(codigo_reserva) ON DELETE CASCADE
 );
 
 ----------Creación de funciones----------
@@ -282,9 +282,8 @@ INSERT INTO Cliente (codigo_cliente_avalista, dni, nombre, apellidos, telefono, 
 
 select * from cliente;
 
-INSERT INTO Reserva (codigo_cliente, precio_total, tipo_seguro, fecha_inicio, fecha_fin, combustible_litros, entregado) VALUES (1, 100, 'Completo', '2020-01-01', '2020-01-02', 10, FALSE);
-INSERT INTO Reserva (codigo_cliente, precio_total, tipo_seguro, fecha_inicio, fecha_fin, combustible_litros, entregado) VALUES (2, 100, 'Completo', '2020-01-01', '2020-01-02', 10, FALSE);
-
+INSERT INTO Reserva (codigo_cliente, precio_total, tipo_seguro, fecha_inicio, fecha_fin, combustible_litros, entregado) VALUES (1, 100, 'Completo', '2025-12-12', '2025-12-20', 10, FALSE);
+INSERT INTO Reserva (codigo_cliente, precio_total, tipo_seguro, fecha_inicio, fecha_fin, combustible_litros, entregado) VALUES (2, 100, 'Completo', '2025-11-11', '2025-11-21', 10, FALSE);
 select * from reserva;
 
 INSERT INTO Involucra (codigo_reserva, codigo_empleado, matricula, precio_alquiler) VALUES (1, 1, '1234ABC', 100);

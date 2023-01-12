@@ -1,5 +1,6 @@
 import os
 import psycopg2
+import re
 from flask import Flask, abort, render_template, request, url_for, redirect
 from datetime import datetime
 
@@ -83,6 +84,10 @@ def facturas():
 @app.route('/add_vehiculo', methods=('GET', 'POST'))
 def add_vehiculo():
     if request.method == 'POST':
+
+        if not re.match("^[0-9]{4}[A-Z]{3}$", request.form['matricula']):
+            return abort(404 , description="La matricula no cumple el formato")
+
         matricula = request.form['matricula']
         codigo_garaje = request.form['codigo_garaje']
         marca = request.form['marca']
@@ -107,12 +112,16 @@ def add_vehiculo():
 @app.route('/delete_vehiculo/', methods=('GET', 'POST'))
 def delete_vehiculo():
     if request.method == 'POST':
+        
+        if not re.match("^[0-9]{4}[A-Z]{3}$", request.form['matricula']):
+            return abort(404 , description="La matricula no cumple el formato")
+
         matricula = request.form['matricula']
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute('DELETE FROM vehiculo WHERE matricula = %s', (matricula,))
         if cur.rowcount == 0:
-            return render_template('delete_vehiculo.html', error='No existe el vehiculo')
+            return abort(404 , description="No existe el vehiculo con esa matricula")
         conn.commit()
         cur.close()
         conn.close()
@@ -124,6 +133,10 @@ def delete_vehiculo():
 @app.route('/update_vehiculo', methods=('GET', 'POST'))
 def update_vehiculo():
     if request.method == 'POST':
+
+        if not re.match("^[0-9]{4}[A-Z]{3}$", request.form['matricula']):
+            return abort(404 , description="La matricula no cumple el formato")
+            
         matricula = request.form['matricula']
         codigo_garaje = request.form['codigo_garaje']
         marca = request.form['marca']
@@ -153,7 +166,10 @@ def add_cliente():
             codigo_cliente_avalista = None
         else:
             codigo_cliente_avalista = request.form['codigo_cliente_avalista']
-
+        
+        if not re.match("^[0-9]{8}[A-Z]$", request.form['dni']):
+            return abort(400 , description="El dni no es válido")
+        
         dni = request.form['dni']
         nombre = request.form['nombre']
         apellidos = request.form['apellidos']
@@ -185,7 +201,7 @@ def delete_cliente():
         cur.execute('DELETE FROM cliente WHERE codigo_cliente = %s',
                     (codigo_cliente,))
         if cur.rowcount == 0:
-            return render_template('delete_cliente.html', error='No existe el cliente')
+            return abort(404 , description="No existe el cliente con ese codigo")
         conn.commit()
         cur.close()
         conn.close()
@@ -268,3 +284,21 @@ def add_reserva():
         return redirect(url_for('reservas'))
 
     return render_template('add_reserva.html')
+
+
+@app.route('/delete_reserva/', methods=('GET', 'POST'))
+def delete_reserva():
+    if request.method == 'POST':
+        codigo_reserva = request.form['codigo_reserva']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('DELETE FROM reserva WHERE codigo_reserva = %s',
+                    (codigo_reserva,))
+        if cur.rowcount == 0:
+            return abort(404, 'No existe la reserva que se quiere eliminar')
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('reservas'))
+
+    return render_template('delete_reserva.html')
