@@ -356,3 +356,91 @@ def update_reserva():
     return render_template('update_reserva.html')
 
 
+@app.route('/add_registro', methods=('GET', 'POST'))
+def add_registro():
+    if request.method == 'POST':
+        if request.form['codigo_reserva'] == '':
+            return abort(400, 'Error en el codigo de reserva')
+        
+        if request.form['codigo_empleado'] == '':
+            return abort(400, 'Error en el codigo de empleado')
+
+        if not re.match("^[0-9]{4}[A-Z]{3}$", request.form['matricula']):
+            return abort(400 , description="La matricula no cumple el formato")
+
+        if request.form['precio_alquiler'] != '':
+            if request.form['precio_alquiler'].isdigit():
+                if int(request.form['precio_alquiler']) < 0:
+                    return abort(400, 'Error en el precio de alquiler')
+        
+        precio_alquiler = request.form['precio_alquiler']    
+        codigo_reserva = request.form['codigo_reserva']
+        codigo_empleado = request.form['codigo_empleado']
+        matricula = request.form['matricula']
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('INSERT INTO involucra (codigo_reserva, codigo_empleado, matricula, precio_alquiler) VALUES (%s, %s, %s, %s)',
+                    (codigo_reserva, codigo_empleado, matricula, precio_alquiler))
+        conn.commit()
+        if cur.rowcount == 0:
+            return abort(404, 'No se puede registrar la reserva')
+        cur.close()
+        conn.close()
+        return redirect(url_for('registros'))
+
+    return render_template('add_registro.html')
+
+@app.route('/delete_registro/', methods=('GET', 'POST'))
+def delete_registro():
+    if request.method == 'POST':
+        codigo_reserva = request.form['codigo_reserva']
+        codigo_empleado = request.form['codigo_empleado']
+        matricula = request.form['matricula']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('DELETE FROM involucra WHERE codigo_reserva = %s AND codigo_empleado = %s AND matricula = %s',
+                    (codigo_reserva, codigo_empleado, matricula))
+        if cur.rowcount == 0:
+            return abort(404, 'No existe el registro que se quiere eliminar')
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('registros'))
+
+    return render_template('delete_registro.html')
+
+@app.route('/update_registro', methods=('GET', 'POST'))
+def update_registro():
+    if request.method == 'POST':
+        if request.form['codigo_reserva'] == '':
+            return abort(400, 'Error en el codigo de reserva')
+        
+        if request.form['codigo_empleado'] == '':
+            return abort(400, 'Error en el codigo de empleado')
+
+        if request.form['precio_alquiler'] != '':
+            if request.form['precio_alquiler'].isdigit():
+                if int(request.form['precio_alquiler']) < 0:
+                    return abort(400, 'Error en el precio de alquiler')
+        
+        precio_alquiler = request.form['precio_alquiler']    
+        codigo_reserva = request.form['codigo_reserva']
+        codigo_empleado = request.form['codigo_empleado']
+        matricula = request.form['matricula']
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('UPDATE involucra SET precio_alquiler = %s WHERE codigo_reserva = %s AND codigo_empleado = %s AND matricula = %s',
+                    (precio_alquiler, codigo_reserva, codigo_empleado, matricula))
+
+        if cur.rowcount == 0:
+            return abort(404, 'No existe el registro que se quiere actualizar')
+
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('registros'))
+
+    return render_template('update_registro.html')
+

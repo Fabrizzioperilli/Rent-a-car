@@ -1,38 +1,27 @@
 {% extends 'base.html' %} {% block content %}
 
 <form method="post">
-  <h2>Añadir una nueva reserva</h2>
   <p>
-    <label for="codigo_cliente">Codigo Cliente</label>
-    <input type="number" name="codigo_cliente" placeholder="Codigo Cliente" />
+    <label for="codigo_reserva">ID Reserva</label>
+    <input type="number" name="codigo_reserva" placeholder="ID Reserva" />
   </p>
   <p>
-    <label for="tipo_seguro">Tipo de Seguro</label>
-    <select name="tipo_seguro">
-      <option value="Completo">Completo</option>
-      <option value="Terceros">Terceros</option>
-    </select>
+    <label for="codigo_empleado">ID Empleado</label>
+    <input type="number" name="codigo_empleado" placeholder="ID Empleado" />
   </p>
   <p>
-    <label for="fecha_inicio">Fecha Inicio</label>
-    <input type="date" name="fecha_inicio" placeholder="Fecha Inicio" />
+    <label for="matricula">Matricula</label>
+    <input type="text" name="matricula" placeholder="Matricula" />
   </p>
   <p>
-    <label for="fecha_fin">Fecha Fin</label>
-    <input type="date" name="fecha_fin" placeholder="Fecha Fin" />
-  </p>
-  <p>
-    <label for="combustible_litros">Combustible Litros</label>
-    <input
-      type="number"
-      name="combustible_litros"
-      placeholder="Combustible Litros"
-    />
+    <label for="precio_alquiler">Precio Alquiler</label>
+    <input type="number" name="precio_alquiler" placeholder="Precio Alquiler" />
   </p>
   <p>
     <button type="submit">Añadir</button>
   </p>
 </form>
+
 <style>
   form {
     width: 50%;
@@ -69,6 +58,7 @@
     background-color: #f2f2f2;
     padding: 20px;
   }
+  
   h2 {
     color: #2f2f2f;
     font-family: "Lucida Sans";

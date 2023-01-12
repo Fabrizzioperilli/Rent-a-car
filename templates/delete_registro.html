@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% block content %}
+
+<form method="post">
+  <h2>Eliminar un registro</h2>
+  <p>
+    <label for="codigo_reserva">Código de reserva</label>
+    <input
+      type="number"
+      name="codigo_reserva"
+      placeholder="Introduce el código de reserva"
+    />
+  </p>
+  <label for="codigo_empleado">Código de empleado</label>
+  <input
+    type="number"
+    name="codigo_empleado"
+    placeholder="Introduce el código de empleado"
+  />
+  <p></p>
+  <p>
+    <label for="matricula">Matricula</label>
+    <input type="text" name="matricula" placeholder="Introduce la matricula" />
+  </p>
+  <p>
+    <button type="submit">Eliminar</button>
+  </p>
+</form>
+
+<style>
+  form {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    background-color: #f44336;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+  h2 {
+    color: #2f2f2f;
+    font-family: "Lucida Sans";
+  }
+</style>
+
+{% endblock %}
+

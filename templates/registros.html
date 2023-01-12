@@ -48,4 +48,52 @@
     font-family: "Lucida Sans";
   }
 </style>
+<br/>
+<center>
+  <nav>
+    <a href="{{url_for('add_registro')}}" class="buttom_add_registro">Añadir Registro</a>
+    <a href="{{url_for('delete_registro')}}" class="buttom_delete_registro">Eliminar Registro</a>
+    <a href="{{url_for('update_registro')}}" class="buttom_update_registro">Actualizar Registro</a>
+  </nav>
+</center>
+<style>
+  .buttom_add_registro {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .buttom_delete_registro {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .buttom_update_registro {
+    background-color: #008cba;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+</style>
+
+
 {% endblock %}

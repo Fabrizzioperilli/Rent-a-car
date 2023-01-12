@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% block content %}
+
+<form method="post">
+  <h2>Actualizar Registro</h2>
+  <p>
+    <label for="codigo_reserva">ID reserva</label>
+    <input
+      type="text"
+      name="codigo_reserva"
+      placeholder="Introduce el ID de la reserva"
+    />
+  </p>
+  <p>
+    <label for="codigo_empleado">ID empleado</label>
+    <input
+      type="text"
+      name="codigo_empleado"
+      placeholder="Introduce el ID del empleado"
+    />
+  </p>
+  <p>
+    <label for="matricula">Matricula</label>
+    <input
+      type="text"
+      name="matricula"
+      placeholder="Introduce la matricula del vehículo"
+    />
+  </p>
+  <p>
+    <label for="precio_alquiler">Precio Alquiler</label>
+    <input
+      type="number"
+      name="precio_alquiler"
+      placeholder="Introduce el precio del alquiler"
+    />
+  </p>
+  <p>
+    <button type="submit">Actualizar</button>
+  </p>
+</form>
+<style>
+  form {
+    width: 50%;
+    margin: 0 auto;
+  }
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    background-color: #008cba;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  h2 {
+    color: #2f2f2f;
+    font-family: "Lucida Sans";
+  }
+</style>
+
+{% endblock %}
