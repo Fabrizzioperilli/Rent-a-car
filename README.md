@@ -113,3 +113,5 @@ Fabrizzio Daniell Perilli Martín alu0101138589@ull.edu.es
 
 
 ---
+![GitHub repo size](https://img.shields.io/github/repo-size/FabrizzioPerilli/Rent-a-car)
+![GitHub last commit](https://img.shields.io/github/last-commit/FabrizzioPerilli/Rent-a-car)
